@@ -1,0 +1,40 @@
+web:
+  restart: always
+  build: ./web
+  links:
+    - postgres
+    - redis
+  volumes:
+    - ./web:/usr/src/app/
+  env_file: .env
+  command: /usr/local/bin/gunicorn project.wsgi:application -w 2 -b :8000
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "8073:80"
+  volumes:
+    - /www/static
+  volumes_from:
+    - web
+  links:
+    - web:web
+
+postgres:
+  restart: always
+  image: postgres:latest
+  volumes_from:
+    - data
+
+redis:
+  restart: always
+  image: redis:latest
+
+data:
+  restart: "no"
+  image: postgres:latest
+  volumes:
+    - /var/lib/postgresql
+    - ./backup:/backup
+  command: "true"

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+Editor
+<div id="playlist">
+  <ul></ul>
+</div>
+<div>
+    <button type="button" class="btn btn-primary" onclick="newTextPanel()"><span class="glyphicon glyphicon-plus"></span> New Text Panel</button>
+    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Image Panel</button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$( document ).ready(function () {
+    $('<div/>').appendTo($('#playlist')).load('/playlist/update/1/')
+
+    newTextPanel();
+});
+
+function newTextPanel() {
+    $('<div/>').appendTo($('#playlist')).load('{% url 'textpanel_create' %}');
+}
+
+function ajaxSubmit(e) {
+    e.preventDefault();
+    $.ajax({
+        url : $(this).attr('action') || window.location.pathname,
+        type: "POST",
+        data: $(this).serialize(),
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (jXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+</script>
+{% endblock %}

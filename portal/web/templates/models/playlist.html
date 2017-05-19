@@ -1,0 +1,10 @@
+<form action="{% url 'playlist_update' pk=form.instance.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="form-group playlist_form">
+      Name: {{ form.name }}
+
+      <select name="panels" id="id_panels" multiple="multiple" required hidden="true">
+      </select>
+    <input type="submit" value="send" hidden="true">
+  </div>
+</form>

@@ -1,0 +1,7 @@
+Django<2.0
+django-environ
+colorlog
+
+# Optional Integrations
+oauth2client
+raven
