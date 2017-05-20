@@ -1,20 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-Editor
+<div class="panel panel-default">
+  <div class="panel-heading">
+        <div class="panel-title">
+    <div class="row">
+      <div class="col-xs-8 text-left">
+        <h4>Program Editor</h4>
+      </div>
+      <div class="col-xs-4 text-right">
+          <button class="btn btn-success">
+              <span class="glyphicon glyphicon-saved"></span> Save
+          </button>
+          <button class="btn btn-primary">
+              <span class="glyphicon glyphicon-folder-open"></span> Load
+          </button>
+          <button class="btn btn-warning">
+              <span class="glyphicon glyphicon-trash"></span> New
+          </button>
+      </div>
+        </div>
+        </div>
+  </div>
+  <div class="panel-body" id="editor_panel">
+  </div>
+</div>
+
 <div id="playlist">
   <ul></ul>
 </div>
-<div>
-    <button type="button" class="btn btn-primary" onclick="newTextPanel()"><span class="glyphicon glyphicon-plus"></span> New Text Panel</button>
-    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New Image Panel</button>
+
+    <div>
+    <button type="button" class="btn btn-primary" onclick="newTextPanel()"><span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-pencil"></span> New Text Panel</button>
+    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-picture"></span> New Image Panel</button>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
 $( document ).ready(function () {
-    $('<div/>').appendTo($('#playlist')).load('/playlist/update/1/')
+    $('<div/>').appendTo($('#editor_panel')).load('/playlist/update/1/')
 
     newTextPanel();
 });
