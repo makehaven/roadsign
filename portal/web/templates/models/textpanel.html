@@ -7,7 +7,7 @@
         <h4>Text Panel</h4>
       </div>
       <div class="col-xs-4 text-right">
-          <button class="btn btn-danger" onclick="$('#textpanel_{{ form.instance.pk }}').remove(); $.post('{% url 'textpanel_delete' form.instance.pk %}', data={'csrfmiddlewaretoken': '{{ csrf_token }}'});">
+          <button class="btn btn-danger">
               <span class="glyphicon glyphicon-remove"></span> Delete
           </button>
       </div>
@@ -26,3 +26,9 @@
   </div>
 </div>
 
+<script>
+    $('#textpanel_{{ form.instance.pk }} button').click(function() {
+        $('#textpanel_{{ form.instance.pk }}').remove();
+        $.post('{% url 'textpanel_delete' form.instance.pk %}', data={'csrfmiddlewaretoken': '{{ csrf_token }}'});
+    });
+</script>
