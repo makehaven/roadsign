@@ -1,0 +1,17 @@
+# Environment settings for development purposes.
+# Copy this file to path/to/BASE_DIR/.env
+# Note that these settings are *not* secure.
+
+DEBUG=true
+SECRET_KEY="not-so-secret"
+
+HOST_NAME="*"
+
+DATABASE_URL="sqlite:///db.sqlite3"
+
+# GOOGLE_ANALYTICS_KEY=""
+
+# GOOGLE_OPENIDCONNECT_KEY=""
+# GOOGLE_OPENIDCONNECT_SECRET=""
+
+# SENTRY_DSN=""

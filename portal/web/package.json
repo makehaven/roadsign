@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ITNG/django-skeleton"
+  },
+  "scripts": {
+    "build": "echo 'No javascript build script...'"
+  }
+}
