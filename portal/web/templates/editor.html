@@ -15,20 +15,22 @@
           <button class="btn btn-primary">
               <span class="glyphicon glyphicon-folder-open"></span> Load
           </button>
-          <button class="btn btn-warning">
+          <button class="btn btn-warning" id="newplaylistbutton">
               <span class="glyphicon glyphicon-trash"></span> New
           </button>
       </div>
         </div>
         </div>
   </div>
-  <div class="panel-body" id="editor_panel">
-  </div>
-</div>
-
+  <div class="panel-body">
+      <div id="editor_panel">
+      </div>
 <div id="playlist">
   <ul></ul>
 </div>
+  </div>
+</div>
+
 
     <div>
     <button type="button" class="btn btn-primary" onclick="newTextPanel()"><span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-pencil"></span> New Text Panel</button>
@@ -39,10 +41,19 @@
 {% block scripts %}
 <script>
 $( document ).ready(function () {
-    $('<div/>').appendTo($('#editor_panel')).load('/playlist/update/1/')
-
-    newTextPanel();
+    $('#newplaylistbutton').click(newPlaylist);
+    $('#saveplaylistbutton').click(savePlaylist);
+    newPlaylist();
 });
+
+function newPlaylist() {
+    $('<div/>').appendTo($('#editor_panel').empty()).load('{% url 'playlist_create' %}')
+}
+
+function savePlaylist() {
+    $('#playlist form').submit(ajaxSubmit).submit();
+    $('#editor_panel form').submit(ajaxSubmit).submit();
+}
 
 function newTextPanel() {
     $('<div/>').appendTo($('#playlist')).load('{% url 'textpanel_create' %}');

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+        <div class="panel-title">
+    <div class="row">
+      <div class="col-xs-8 text-left">
+        <h4>Saved Programs</h4>
+      </div>
+    </div>
+        </div>
+  </div>
+  <div class="panel-body">
+
+{% for obj in object_list %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-8 text-left">
+        <h4>{{ obj.name }}</h4>
+      </div>
+      <div class="col-xs-4 text-right">
+          <a class="btn btn-primary">
+              <span class="glyphicon glyphicon-folder-open"></span> Open
+          </a>
+          <a class="btn btn-danger" href="{% url 'playlist_delete' pk=obj.pk %}">
+              <span class="glyphicon glyphicon-trash"></span> Delete
+          </a>
+      </div>
+        </div>
+  </div>
+</div>
+{% endfor %}
+  </div>
+</div>
+{% endblock %}
