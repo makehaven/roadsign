@@ -1,0 +1,77 @@
+FORMAT: 1A
+HOST: http://roadsign.ebenolson.com/
+
+# Road Sign API
+
+A simple API for controlling road signs.
+
+## Sign Collection [/signs]
+
+### List all signs [GET]
++ Response 200 (application/json)
+    + Attributes (array[Sign], fixed-type)
+ 
+## Sign [/signs/{id}]
++ Attributes
+    + id: 42 (number)
+    + name: Alpha
+    + current_program: Snow Warning
+    + program_hash: 2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+
+### Check a sign [GET]
+Get the current status of a sign.
++ Response 200 (application/json)
+    + Attributes (Sign)
+
+### Update a sign [PUT]
+Upload a new program to be displayed on a sign.
++ Request (application/json)
+    + Attributes
+        - program (Program)
+
++ Response 200 (application/json)
+    + Attributes (Sign)
++ Response 400 (application/json)
+    This response is returned if the provided program is invalid.
+    + Body
+
+### Create a new sign [POST]
+Provision a new sign using its Particle ID.
++ Request (application/json)
+    + Attributes
+        - name: Beta (string)
+        - particle_id: 1234567890abcdefg123 (string)
+
++ Response 200 (application/json)
+    + Attributes (Sign)
+
+### Remove a sign [DELETE]
++ Response 200 (application/json)
+
+# Data Structures
+
+## Block (object)
+Data to be displayed on a sign, such as text, image or animation.
+
+## TextPanel (Block)
+A sign Block consisting of text.
+
++ text (array[string])
+    Text to be displayed, one string per line. Font size will be scaled to fit all lines on the sign (max 5). Empty lines can be used for padding.
+    
+## ImagePanel (Block)
+A sign Block consisting of an image.
+
++ image (string)
+    Image data as base64-encoded binary data. Image will be resized and converted to black and white as necessary.
+    
+## AnimationPanel (Block)
+A sign Block consisting of an animated image.
+
++ image (string)
+    Image data as base-64 encoded binary data. Image must be an animated gif, and will be resized and converted to black and white as necessary.
+
+## Program (object)
+A sequence of Blocks to display on a sign.
+
++ blocks (array[Block])
